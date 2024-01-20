@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.zachahn.alfred-tableplus-workflow</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>46FF4F91-E9E3-4910-92EE-696CB65751E5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>929F52AF-9389-4916-A840-B713DDD9A8ED</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Zach Ahn</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>TablePlus</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string>com.apple.Safari</string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>929F52AF-9389-4916-A840-B713DDD9A8ED</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>require "json"
+
+def main
+  possible_files = [
+    File.expand_path("~/Library/Application Support/com.tinyapp.TablePlus/Data/Connections.plist"),
+  ]
+
+  connections_file = possible_files.find { |filepath| File.file?(filepath) }
+
+  if connections_file.nil?
+    error_message = {
+      title: "Could not fetch connections",
+      valid: false,
+    }
+    puts JSON.dump({items: [error_message]})
+    return
+  end
+
+  output = parse_plist(connections_file).map do |connection|
+    id = connection.fetch("ID")
+    name = connection.fetch("ConnectionName")
+    db_name = connection.fetch("DatabaseName")
+    env = connection.fetch("Enviroment")
+    {
+      uid: id,
+      title: name,
+      subtitle: "[#{env}] #{db_name}",
+      match: "#{name} #{env} #{db_name}",
+      arg: "tableplus://?id=#{id}"
+    }
+  end
+  puts JSON.dump({items: output})
+end
+
+def parse_plist(filepath)
+  r, w = IO.pipe
+  spawn("plutil -convert json -o - -", in: filepath, out: w)
+  w.close
+  Process.wait
+  JSON.parse(r.read)
+end
+
+main</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Fetching connections</string>
+				<key>type</key>
+				<integer>2</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>46FF4F91-E9E3-4910-92EE-696CB65751E5</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># TablePlus workflow for Alfred 5
+
+Tiny, quick, reliable script for quickly launching your saved connections.
+
+---
+
+Licensed under the MIT License
+
+Copyright (c) 2024 Zach Ahn</string>
+	<key>uidata</key>
+	<dict>
+		<key>46FF4F91-E9E3-4910-92EE-696CB65751E5</key>
+		<dict>
+			<key>xpos</key>
+			<real>90</real>
+			<key>ypos</key>
+			<real>85</real>
+		</dict>
+		<key>929F52AF-9389-4916-A840-B713DDD9A8ED</key>
+		<dict>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>85</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>db</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Keyword used to start a search</string>
+			<key>label</key>
+			<string>Search Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>search_keyword</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>0.1.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/zachahn/alfred-tableplus-workflow</string>
+</dict>
+</plist>
