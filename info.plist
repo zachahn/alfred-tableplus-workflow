@@ -69,7 +69,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>{var:keyword}</string>
+				<string>{var:search_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
