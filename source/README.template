@@ -1,0 +1,27 @@
+# TablePlus workflow for Alfred 5
+
+A tiny, fast, and reliable workflow for launching your saved TablePlus
+connections.
+
+At only %{loc} lines of code and built for Alfred 5, this should be one of the
+fastest workflows for TablePlus.
+
+<https://github.com/zachahn/alfred-tableplus-workflow>
+
+## Requirements
+
+* [Alfred 5](https://www.alfredapp.com) with Powerpack
+* [TablePlus](https://tableplus.com)
+* Ruby, a programming language that comes built-in with every Mac
+* `plutil`, a utility that comes built-in with every Mac
+
+## See also
+
+Here are some similar workflows which may fulfill your needs better:
+
+* https://github.com/chrisrenga/alfred-tableplus
+* https://github.com/goronfreeman/alfred-tableplus
+
+## License
+
+%{license}

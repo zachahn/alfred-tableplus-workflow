@@ -81,50 +81,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>require "json"
-
-def main
-  possible_files = [
-    File.expand_path("~/Library/Application Support/com.tinyapp.TablePlus/Data/Connections.plist"),
-  ]
-
-  connections_file = possible_files.find { |filepath| File.file?(filepath) }
-
-  if connections_file.nil?
-    error_message = {
-      title: "Could not fetch connections",
-      valid: false,
-    }
-    puts JSON.dump({items: [error_message]})
-    return
-  end
-
-  output = parse_plist(connections_file).map do |connection|
-    id = connection.fetch("ID")
-    name = connection.fetch("ConnectionName")
-    db_name = connection.fetch("DatabaseName")
-    env = connection.fetch("Enviroment")
-    {
-      uid: id,
-      title: name,
-      subtitle: "[#{env}] #{db_name}",
-      match: "#{name} #{env} #{db_name}",
-      arg: "tableplus://?id=#{id}"
-    }
-  end
-  puts JSON.dump({items: output})
-end
-
-def parse_plist(filepath)
-  r, w = IO.pipe
-  spawn("plutil -convert json -o - -", in: filepath, out: w)
-  w.close
-  Process.wait
-  JSON.parse(r.read)
-end
-
-main
-</string>
+				<string>%{script}</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -147,55 +104,7 @@ main
 		</dict>
 	</array>
 	<key>readme</key>
-	<string># TablePlus workflow for Alfred 5
-
-A tiny, fast, and reliable workflow for launching your saved TablePlus
-connections.
-
-At only 43 lines of code and built for Alfred 5, this should be one of the
-fastest workflows for TablePlus.
-
-&lt;https://github.com/zachahn/alfred-tableplus-workflow&gt;
-
-## Requirements
-
-* [Alfred 5](https://www.alfredapp.com) with Powerpack
-* [TablePlus](https://tableplus.com)
-* Ruby, a programming language that comes built-in with every Mac
-* `plutil`, a utility that comes built-in with every Mac
-
-## See also
-
-Here are some similar workflows which may fulfill your needs better:
-
-* https://github.com/chrisrenga/alfred-tableplus
-* https://github.com/goronfreeman/alfred-tableplus
-
-## License
-
-MIT License
-
-Copyright (c) 2024 Zach Ahn
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-</string>
+	<string>%{readme}</string>
 	<key>uidata</key>
 	<dict>
 		<key>46FF4F91-E9E3-4910-92EE-696CB65751E5</key>
@@ -240,7 +149,7 @@ SOFTWARE.
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>0.1.1</string>
+	<string>%{version}</string>
 	<key>webaddress</key>
 	<string>https://github.com/zachahn/alfred-tableplus-workflow</string>
 </dict>
