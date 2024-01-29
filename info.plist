@@ -36,7 +36,7 @@
 			<key>config</key>
 			<dict>
 				<key>browser</key>
-				<string>com.apple.Safari</string>
+				<string></string>
 				<key>skipqueryencode</key>
 				<true/>
 				<key>skipvarencode</key>
