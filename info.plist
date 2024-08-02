@@ -25,7 +25,7 @@
 	<key>createdby</key>
 	<string>Zach Ahn</string>
 	<key>description</key>
-	<string></string>
+	<string>Launch your saved TablePlus connections</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -79,7 +79,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>Fetching connections…</string>
 				<key>script</key>
 				<string>require "json"
 
@@ -130,9 +130,9 @@ main
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string></string>
+				<string>{const:alfred_workflow_description}</string>
 				<key>title</key>
-				<string>Fetching connections</string>
+				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
 				<integer>2</integer>
 				<key>withspace</key>
@@ -193,9 +193,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-</string>
+SOFTWARE.</string>
 	<key>uidata</key>
 	<dict>
 		<key>46FF4F91-E9E3-4910-92EE-696CB65751E5</key>
