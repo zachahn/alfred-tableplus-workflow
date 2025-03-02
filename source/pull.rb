@@ -1,25 +1,11 @@
 #!/usr/bin/env ruby --disable-gems
 
-require "pathname"
-require "json"
+require_relative "./lib"
 
-class String
-  def unescape
-    gsub("&lt;", "<").gsub("&gt;", ">").gsub("&amp;", "&")
-  end
-end
+log1 "Copying live workflow info.plist to repository"
+FileUtils.cp(LIVE_WORKFLOW_DIR/"info.plist", HERE/".."/"info.plist")
 
-here = Pathname.new(__dir__)
+log1 "Copying live workflow icon.png to repository"
+FileUtils.cp(LIVE_WORKFLOW_DIR/"icon.png", HERE/".."/"icon.png")
 
-(here/"env").read.each_line do |line|
-  key, value = line.split("=", 2).map(&:strip)
-  next if value.nil?
-  ENV[key] ||= value
-end
-
-live_contents_path = (Pathname.new(ENV.fetch("INSTALLED_WORKFLOW_PATH"))/"info.plist")
-live_contents = live_contents_path.read
-
-(here/"plist.template").write(live_contents)
-
-puts "done (kinda)"
+log1 "Done"

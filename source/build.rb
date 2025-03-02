@@ -1,36 +1,23 @@
 #!/usr/bin/env ruby --disable-gems
 
-require "pathname"
+require_relative "./lib"
 
-class String
-  def escape_some
-    gsub("&", "&amp;").gsub("<", "&lt;").gsub(">", "&gt;")
-  end
-end
-
-here = Pathname.new(__dir__)
-
-(here/"env").read.each_line do |line|
-  key, value = line.split("=", 2).map(&:strip)
-  next if value.nil?
-  ENV[key] ||= value
-end
-
-script_rb = (here/"script.rb").read
-readme_md = (here/"README.template").read
-info_plist = (here/"plist.template").read
+script_rb = HERE.join("script.rb").read
+readme_md = HERE.join("README.template").read
+info_plist = HERE.join("plist.template").read
 
 variables = {}
-variables[:license] = (here/"../LICENSE").read
-variables[:version] = (here/"VERSION").read.strip
-variables[:script] = script_rb.escape_some
+variables[:license] = HERE.join("../LICENSE").read.strip
+variables[:version] = HERE.join("VERSION").read.strip
+variables[:script] = escape_for_xml(script_rb)
 variables[:loc] = script_rb.lines.count
 variables[:readme_raw] = readme_md % variables
-variables[:readme] = variables[:readme_raw].escape_some
+variables[:readme] = escape_for_xml(variables[:readme_raw].strip)
 final = info_plist % variables
 
-(here/"../README.md").write(variables[:readme_raw])
-(here/"../info.plist").write(final)
-File.write(File.join(ENV.fetch("INSTALLED_WORKFLOW_PATH"), "info.plist"), final)
+log1 "Writing README.md"
+HERE.join("../README.md").write(variables[:readme_raw])
+log1 "Writing info.plist"
+HERE.join("../info.plist").write(final)
 
-puts "done"
+log1 "Done"
