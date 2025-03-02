@@ -25,7 +25,7 @@
 	<key>createdby</key>
 	<string>Zach Ahn</string>
 	<key>description</key>
-	<string></string>
+	<string>Launch your saved TablePlus connections</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -79,7 +79,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>Fetching connections…</string>
 				<key>script</key>
 				<string>%{script}</string>
 				<key>scriptargtype</key>
@@ -87,9 +87,9 @@
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string></string>
+				<string>{const:alfred_workflow_description}</string>
 				<key>title</key>
-				<string>Fetching connections</string>
+				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
 				<integer>2</integer>
 				<key>withspace</key>
