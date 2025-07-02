@@ -3,6 +3,7 @@ require "json"
 def main
   possible_files = [
     File.expand_path("~/Library/Application Support/com.tinyapp.TablePlus/Data/Connections.plist"),
+    File.expand_path("~/Library/Application Support/com.tinyapp.TablePlus-setapp/Data/Connections.plist"),
   ]
 
   connections_file = possible_files.find { |filepath| File.file?(filepath) }
