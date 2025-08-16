@@ -3,7 +3,7 @@
 A tiny, fast, and reliable workflow for launching your saved TablePlus
 connections.
 
-At only 43 lines of code and built for Alfred 5, this should be one of the
+At only 44 lines of code and built for Alfred 5, this should be one of the
 fastest workflows for TablePlus.
 
 <https://github.com/zachahn/alfred-tableplus-workflow>
