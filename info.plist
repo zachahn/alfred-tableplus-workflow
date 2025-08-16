@@ -153,7 +153,7 @@ main
 A tiny, fast, and reliable workflow for launching your saved TablePlus
 connections.
 
-At only 43 lines of code and built for Alfred 5, this should be one of the
+At only 44 lines of code and built for Alfred 5, this should be one of the
 fastest workflows for TablePlus.
 
 &lt;https://github.com/zachahn/alfred-tableplus-workflow&gt;
@@ -161,9 +161,17 @@ fastest workflows for TablePlus.
 ## Requirements
 
 * [Alfred 5](https://www.alfredapp.com) with Powerpack
-* [TablePlus](https://tableplus.com)
+* [TablePlus](https://tableplus.com) (supports both standard installation and Setapp installation)
 * Ruby, a programming language that comes built-in with every Mac
 * `plutil`, a utility that comes built-in with every Mac
+
+## Installation Methods
+
+This workflow supports TablePlus installed via:
+- **Standard installation** from the TablePlus website or Mac App Store
+- **Setapp subscription** service
+
+The workflow automatically detects which installation method you're using and finds your connections accordingly.
 
 ## See also
 

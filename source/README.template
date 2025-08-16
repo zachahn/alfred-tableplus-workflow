@@ -11,9 +11,17 @@ fastest workflows for TablePlus.
 ## Requirements
 
 * [Alfred 5](https://www.alfredapp.com) with Powerpack
-* [TablePlus](https://tableplus.com)
+* [TablePlus](https://tableplus.com) (supports both standard installation and Setapp installation)
 * Ruby, a programming language that comes built-in with every Mac
 * `plutil`, a utility that comes built-in with every Mac
+
+## Installation Methods
+
+This workflow supports TablePlus installed via:
+- **Standard installation** from the TablePlus website or Mac App Store
+- **Setapp subscription** service
+
+The workflow automatically detects which installation method you're using and finds your connections accordingly.
 
 ## See also
 
